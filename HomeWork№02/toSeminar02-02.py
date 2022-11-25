@@ -1,7 +1,7 @@
 #Напишите программу, которая принимает на вход число N и выдает набор произведений чисел от 1 до N.
 #Пример:
 #- пусть N = 4, тогда [ 1, 2, 6, 24 ] (1, 1*2, 1*2*3, 1*2*3*4)
-print ('\033[34m{}') 
+print ('\033[34m{}') #Цвет шрифта - синий <34m>
 import os
 os.system('CLS')
 number = input('Введите число N : ')
@@ -15,5 +15,5 @@ for i in temp:
     listMultiplication.append( mult * temp[i - 1])
     print(f'\tN = {i} {listMultiplication}')
     mult = mult * temp[i - 1] 
-print ('\033[31m{}' .format('\tУдачи !'))  
+print ('\033[31m{}' .format('\tУдачи !')) #Цвет шрифта красный <31> 
 print('\033[0m')  
