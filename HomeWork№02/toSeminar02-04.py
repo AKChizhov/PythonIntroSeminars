@@ -3,12 +3,16 @@
 # Для продвинутых - с файлом ( вариант минимум - ввести позиции в консоли) -2 -1 0 1 2 Позиции: 0,1 -> 2
 
 try:
-    somefile = open("hello.txt", "w")
+    somefile = open("dataTo04.txt", "w")
     try:
-        somefile.write("hello world")
+        somefile.write("hello world !")
     except Exception as e:
         print(e)
     finally:
         somefile.close()
 except Exception as ex:
     print(ex)
+    
+number = int(input('Введите число N : ') )
+numberList = range ((-number), (number))
+print(numberList)
