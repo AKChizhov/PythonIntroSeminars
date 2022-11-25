@@ -128,4 +128,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-.dataTo04.txt
+# without dataTo04.txt
+dataTo04.txt
