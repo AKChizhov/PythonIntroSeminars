@@ -12,7 +12,7 @@ i=0
 while i < len(xyz):
     print(xyz[i], end=' ')
     i+=1
-leftSide = not (xyz[0] or xyz[1] or xyz[2])#¬(X ⋁ Y ⋁ Z)
+leftSide = not (xyz[0] or xyz[1] or xyz[2])#¬(X ⋁ Y ⋁ Z
 rightSide = not xyz[0] and not xyz[1] and not xyz[2]#¬X ⋀ ¬Y ⋀ ¬Z
 #print('\n',not (xyz[0] or xyz[1] or xyz[2]) == not xyz[0] and not xyz[1] and not xyz[2]) - не читаемо, разделил на 2 части
 print('\n\tРезультат : ',leftSide == rightSide,'\n')
