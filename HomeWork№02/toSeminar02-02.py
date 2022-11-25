@@ -16,4 +16,4 @@ for i in temp:
     print(f'\tN = {i} {listMultiplication}')
     mult = mult * temp[i - 1] 
 print ('\033[31m{}' .format('\tУдачи !')) #Цвет шрифта красный <31> 
-print('\033[0m')  
+print('\033[0m')#Возврат стандартного цвета шрифта  
