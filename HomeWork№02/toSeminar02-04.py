@@ -4,7 +4,7 @@
 import os
 os.system('CLS')
 
-FILENAME = "messages.txt"#Название файла
+FILENAME = "dataTo04.txt"#Название файла
 messages = list()#Сщоздан пустой список
  
 number = int(input('Введите число N : ') ) 
@@ -34,21 +34,33 @@ while (i < len(dat)):
     if(dat[i] != 0):
         mult = mult * dat[i]
     i+= 1
-print(f'\nПроизведение чисел от : {-number}  по: {number} ( 0 не учитывается ) равно : {mult}')
+print(f'\nПроизведение чисел от : {-number}  по: {number} ( 0 не учитывается ) равно : {mult}\n')
 
 print(f'Введите через пробелы или запятую  2 числа из выше указанного интервала от  {-number}  по: {number}')
 borders = input()
 borders = borders.replace(',', '')
 borders = list(map(int,borders.split()))
 i = 0
-while(i < len(dat)):
-    if(dat[i] == borders[0]): iStart = i 
-    if(dat[i] == borders[1]): iEnd = i
-    i+=1     
-mult = 1
-i = iStart
-while (i  <= iEnd):
-    if(dat[i] != 0):
-        mult = mult * dat[i]
-    i+= 1
-print(f'\nПроизведение чисел от : {borders[0]}  по: {borders[1]} ( 0 не учитывается ) равно : {mult}')
+myFlag = 1
+while( i < 2):
+    if(borders[i] < -number or borders[i] > number):
+         myFlag = 0  
+    i+=1    
+
+if(myFlag == 1):
+    j = 0
+    while(j < len(dat)):
+        if(dat[j] == borders[0]): 
+            jStart = j 
+        if(dat[j] == borders[1]): 
+            jEnd = j
+        j+=1 
+            
+    mult = 1
+    i = jStart
+    while (i  <= jEnd):
+        if(dat[i] != 0): mult = mult * dat[i]
+        i += 1
+    print(f'\nПроизведение чисел от : {borders[0]}  по: {borders[1]} ( 0 не учитывается ) равно : {mult}\n')
+else:
+    print('\nНеправильный ввод') 
