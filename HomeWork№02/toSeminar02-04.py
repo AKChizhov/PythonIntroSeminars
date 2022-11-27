@@ -5,30 +5,29 @@ import os
 os.system('CLS')
 
 FILENAME = "dataTo04.txt"#Название файла
-messages = list()#Сщоздан пустой список
+ourDates = list()#Создан пустой список
  
 number = int(input('Введите число N : ') ) 
 for i in range(-number,  (number + 1)):
-    message = str(int(i))
-    messages.append(message + '\n')
+    ourData = str(int(i))
+    ourDates.append(ourData + '\n')
 
-# запись списка в файл
-with open(FILENAME, "w") as file:
-    for message in messages:
-        file.write(message)
-print(message, end='')
+with open(FILENAME, "w") as file: # запись списка в файл
+    for ourData in ourDates:
+        file.write(ourData)
+print(ourData, end='')
 print(f'Список из элементов, заполненных числами из промежутка от : {-number} по: {number} записан в файл {FILENAME}')
  
-# считываем сообщения из файла
+
 dat = []
-with open(FILENAME, "r") as file:
+with open(FILENAME, "r") as file: # считываем список из файла
     i=0
-    for message in file:
-        dat.append(int(message))
+    for ourData in file:
+        dat.append(int(ourData))
 print(dat)
 print(f'Список из элементов, заполненных числами из промежутка от : {-number} по: {number} считан из  файла {FILENAME}')
 
-mult = 1
+mult = 1 #Вычисление проиведения всех считанных чисел
 i = 0
 while (i < len(dat)):
     if(dat[i] != 0):
@@ -43,11 +42,11 @@ borders = list(map(int,borders.split()))
 i = 0
 myFlag = 1
 while( i < 2):
-    if(borders[i] < -number or borders[i] > number):
+    if(borders[i] < -number or borders[i] > number ):#Проверка правильности ввода
          myFlag = 0  
     i+=1    
 
-if(myFlag == 1):
+if(myFlag == 1):#определение индексов выбранного интервала
     j = 0
     while(j < len(dat)):
         if(dat[j] == borders[0]): 
@@ -56,7 +55,7 @@ if(myFlag == 1):
             jEnd = j
         j+=1 
             
-    mult = 1
+    mult = 1#Вычисление проиведения  чисел выбранного интервала
     i = jStart
     while (i  <= jEnd):
         if(dat[i] != 0): mult = mult * dat[i]
