@@ -28,7 +28,7 @@ def fill_list(volume : int ):
     
 def number_list_odds (list1 : list):
     list2 = []
-    i = 0
+    i = 1
     ii = len(list1)
     while(i < ii):
         list2.append(list1[i])
