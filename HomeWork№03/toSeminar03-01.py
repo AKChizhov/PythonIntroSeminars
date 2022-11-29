@@ -4,9 +4,9 @@
 
 import os
 import random
-import math
 
 def main():
+    os.system('CLS')
     volume = create_volume()
     list1 = fill_list (volume)
     list2 = number_list_odds (list1)
