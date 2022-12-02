@@ -7,25 +7,30 @@
 import os
 import random
 
+FILENAME = "to04.txt"
+
 def main():
     os.system('CLS')
-    my_degree = enter_degree()
-    fill_coefficients(my_degree)
-    
+    my_degree = enter_degree()# Степень многочлена
+    my_scoefficient = fill_scoefficient(my_degree)# Коэффициенты многочлена
+    my_result = create_polynomial(my_scoefficient, my_degree)# Сформированный многочлен
+    print_into_fail(my_result)
         
-def enter_degree() -> int: 
-    number = int(input('Введите степень  К  многочлена :')) 
+def enter_degree() -> int: # Ввод степени многочлена
+    number = int(input('Введите степень  К  многочлена : ')) 
     return number
     
-def fill_coefficients(number : int) -> str:
+def fill_scoefficient(number : int) -> str: # Генерирование коэффициентов многочлена
     coeffs = []
     i = 0
     while(i <= number):
         temp = random.randint(0,100)
         coeffs.append(temp)
         i+=1
-    print(coeffs)
+    print(f'\nСформирован список коэффициентов многочлена : {coeffs}')
+    return coeffs
      
+def create_polynomial(coeffs :list[int] , number : int): # Формирование многочлена
     polynomial = []    
     j = 0
     while(j<number):
@@ -33,17 +38,17 @@ def fill_coefficients(number : int) -> str:
         polynomial.append(temp1)   
         j+=1
     temp2 = f"{coeffs[number]} = 0"
-    polynomial.append(temp2)    
-             
-    print(polynomial)
+    polynomial.append(temp2)             
     k = 1
     result = polynomial[0]
     while (k <= number):
         result = result + polynomial[k]
         k+=1
-    print(result)
-    with open("hello.txt", "w") as file: # запись списка в файл      
+    print(f'Сформирован многочлен степени {number} : {result} ,\n\t записанный также в файл {FILENAME}\n')
+    return result
+
+def print_into_fail(result): # запись списка в файл
+    with open(FILENAME, "w") as file:     
          file.write(result)
-    return polynomial
-     
+    
 main()
