@@ -25,29 +25,29 @@ def move( nn : int, list1 : list[str]) -> int: # Игра и определен�
     candies = number_of_candies
     i = 1
     while(candies > 0):
-            if(nn ==0):
-                if(candies == 0) : break
-                elif(candies >= 28) : frontir = 28
-                else: frontir = candies
-                temp = random.randint(1,frontir)
-                k = 0
-                print((f'Ход {i} Игрока {list1[0]}, на столе конфет {candies} , он взял конфет : {temp}' ))
-                candies = candies - temp
-                if(candies == 0) : break
-                temp = int (input((f'Ход {i} Игрока {list1[1]}, на столе конфет {candies} , сколько возмете ? ' )))
-                k = 1
-                candies = candies - temp
-            else :
-                temp = int (input((f'Ход {i} Игрока {list1[1]}, на столе конфет {candies} , сколько возмете ? ' )))
-                k = 1
-                candies = candies - temp
-                if(candies == 0) : break
-                elif(candies >= 28) : frontir = 28
-                else: frontir = candies
-                temp = random.randint(1,frontir)
-                k = 0
-                print((f'Ход {i} Игрока {list1[0]}, на столе конфет {candies} , он взял конфет : {temp}' ))
-                candies = candies - temp
+        if(nn ==0):
+            if(candies == 0) : break
+            elif(candies >= 28) : frontir = 28
+            else: frontir = candies
+            temp = random.randint(1,frontir)
+            k = 0
+            print((f'Ход {i} Игрока {list1[0]}, на столе конфет {candies} , он взял конфет : {temp}' ))
+            candies = candies - temp
+            if(candies == 0) : break
+            temp = int (input((f'Ход {i} Игрока {list1[1]}, на столе конфет {candies} , сколько возмете ? ' )))
+            k = 1
+            candies = candies - temp
+        else :
+            temp = int (input((f'Ход {i} Игрока {list1[1]}, на столе конфет {candies} , сколько возмете ? ' )))
+            k = 1
+            candies = candies - temp
+            if(candies == 0) : break
+            elif(candies >= 28) : frontir = 28
+            else: frontir = candies
+            temp = random.randint(1,frontir)
+            k = 0
+            print((f'Ход {i} Игрока {list1[0]}, на столе конфет {candies} , он взял конфет : {temp}' ))
+            candies = candies - temp
     i+=1
     return k
  
