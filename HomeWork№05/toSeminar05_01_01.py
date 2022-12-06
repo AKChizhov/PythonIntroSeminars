@@ -11,17 +11,17 @@ players = ['Qwe_BOT', 'Zxc_BOT']
 
 def main ():
     os.system('CLS')
-    the_who =  who_fierst()
-    who_end = move(the_who, players)
-    print_message(the_who, who_end, players)
+    the_who =  who_fierst() # Кто делает первый ход
+    who_end = move(the_who, players) # Кто делает последний ход
+    print_message(players[the_who], players[who_end])
     
-def who_fierst():
+def who_fierst() -> int: # определение игрока делающего 1-ый ход
     who = random.randint(0,1)
     if(who == 0): print(f'Первым забирает конфеты  {players[who]}')
     else: print(f'Первым забирает конфеты {players[who]}')
     return who
  
-def move( nn : int, list1 : list[str]):
+def move( nn : int, list1 : list[str]) -> int: # Игра и определение победителя
     candies = number_of_candies
     i = 1
     while(candies > 0):
@@ -31,15 +31,15 @@ def move( nn : int, list1 : list[str]):
             elif(candies > 28): frontir = 28
             else: frontir = candies 
             temp = random.randint(1,frontir)
+            temp1 = int()
             print(f'Ход № {i} игрока {list1[nn - j]} - он взял конфет :', '%2d' % (temp),' шт. На столе осталось конфет :','%3d' % (candies - temp),' шт')
             candies = candies - temp
             j +=1
         i+=1
-        nnn = list1[nn - j +1]
-    return list1[nn - j +1] 
+    return (nn - j +1 )
     
-def print_message(nnn1,nnn2,listing):
+def print_message(nnn1,nnn2): # Вывод результатов игры
     print(f'\nИгра закончена. На столе было : {number_of_candies} конфет. Игроки по-очереди брали конфеты,не больше 28 шт.\n'+
-        f'Выигрывает забирающий последние конфеты. Игрок {nnn2} начал игру. Игрок {listing[nnn1]} победил, ВСЕ конфеты его !!! \n')
+        f'Выигрывает забирающий последние конфеты. Игрок {nnn1} начал игру. Игрок {nnn2} победил, ВСЕ конфеты его !!! \n')
              
 main()   
