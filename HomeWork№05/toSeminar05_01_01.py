@@ -31,8 +31,7 @@ def move( nn : int, list1 : list[str]) -> int: # Игра и определен�
             elif(candies > 28): frontir = 28
             else: frontir = candies 
             temp = random.randint(1,frontir)
-            temp1 = int()
-            print(f'Ход № {i} игрока {list1[nn - j]} - он взял конфет :', '%2d' % (temp),' шт. На столе осталось конфет :','%3d' % (candies - temp),' шт')
+            print(f'Ход № {i} игрока {list1[nn - j]} - он взял конфет :','%2d' % (temp) ,' шт. На столе осталось конфет :','%3d' % (candies - temp),' шт')
             candies = candies - temp
             j +=1
         i+=1
