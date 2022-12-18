@@ -6,11 +6,11 @@ import html_create as hc
 lg.logging.info('The beginning of your work')
 os.system('CLS')
 print('\n\tВы работаете с базой данных Люди - Номера телефонов - Адрес эл.почты')
-
 def ls_menu(): # Модуль пользовательского интерфейса
     while True:
         print('\nДоступны следующие действия :')
-        print('1. Показать все записи в базе данных.')
+        print('0. Показать все записи в базе данных.')
+        print('1. Поиск по ID-номеру.')
         print('2. Поиск по фамилии.')
         print('3. Поиск по имени.')
         print('4. Поиск по номеру телефона.')
@@ -20,14 +20,17 @@ def ls_menu(): # Модуль пользовательского интерфе�
         print('8. Закрыть программу.\n')
         n = сhecking_the_number(input('Что сделать для Вас ? :'))
 
-        if n == 1:
-            lg.logging.info('The user has selected item number 1')
+        if n == 0:
+            lg.logging.info('The user has selected item number 0')
             data_list = cr.retrive()
-            #for e in data_list:
-            #    print(e)
             for index, val in enumerate (data_list, start=1):
-                print(index, val)
-            
+                print(index, val)  
+                       
+        elif n == 1:
+            lg.logging.info('The user has selected item number 1')
+            search = input('Введите ID-номер: ')
+            lg.logging.info('User entered: {search}')
+            print(cr.retrive(id=search))
 
         elif n == 2:
             lg.logging.info('The user has selected item number 2')
@@ -64,6 +67,7 @@ def ls_menu(): # Модуль пользовательского интерфе�
             print('1. Найти номер по фамилии.')
             print('2. Найти номер по имени.')
             print('3. Поиск по номеру телефона.')
+            print('4. Поиск по ID-номеру ')
             change = сhecking_the_number(input('Введите номер пункта: '))
 
             if change == 1:
@@ -98,7 +102,18 @@ def ls_menu(): # Модуль пользовательского интерфе�
                 new_number = input('Введите новый номер телефона: ')
                 lg.logging.info('User entered: {new_number}')
                 cr.update(id=user_id, new_number=new_number)
-
+              
+            elif change == 4:
+                lg.logging.info('The user has selected item number 6.4')
+                search = input('Введите ID-номер: ')
+                lg.logging.info('User entered: {search}')
+                cr.retrive(id=search)
+                user_id = input('Введите id записи: ')
+                lg.logging.info('User entered: {user_id}')
+                new_number = input('Введите новый номер телефона: ')
+                lg.logging.info('User entered: {new_number}')
+                cr.update(id=user_id, new_number=new_number)    
+                         
             else:
                 lg.logging.info('User entered an invalid menu value')
                 print('\nТакого пункта меню не существует.\nВведите цифру, соответствующую пункту меню.')
@@ -108,6 +123,7 @@ def ls_menu(): # Модуль пользовательского интерфе�
             print('1. Найти номер по фамилии.')
             print('2. Найти номер по имени.')
             print('3. Поиск по номеру телефона.')
+            print('4. Поиск по ID-номеру.')
             deleting = сhecking_the_number(input('Введите номер пункта: '))
 
             if deleting == 1:
@@ -135,7 +151,15 @@ def ls_menu(): # Модуль пользовательского интерфе�
                 print(cr.retrive(number=search))
                 user_id = input('Введите id записи: ')
                 lg.logging.info('User entered: {user_id}')
-                #new_number = input('Введите новый номер телефона: ')
+                cr.delete(id=user_id)
+
+            elif deleting == 4:
+                lg.logging.info('The user has selected item number 7.4')
+                search = input('Введите ID-номер: ')
+                lg.logging.info('User entered: {search}')
+                print(cr.retrive(id=search))
+                user_id = input('Введите id записи: ')
+                lg.logging.info('User entered: {user_id}')
                 cr.delete(id=user_id)
 
             else:
