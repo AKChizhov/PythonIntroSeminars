@@ -1,68 +1,65 @@
-import telebot, config
+import telebot, config , os
 from random import randint
 from random import choice
 
-#bot = telebot.TeleBot("TOKEN")
 bot = telebot.TeleBot(config.TOKEN)
 candys = dict()
 enable_game = dict()
-turn = dict()
+who_fierst = dict()
+
+os.system('cls')
 
 def handle_game_proc(message):
     global enable_game
+    
     try:
-        if enable_game[message.chat.id] and 1 <= int(message.text) <= 28:
-            return True
-        else:
-            return False
+        if (enable_game[message.chat.id] and 1 <= int(message.text) <= max_move): return True
+        else: return False
     except KeyError:
         enable_game[message.chat.id] = False
-        if enable_game[message.chat.id] and 1 <= int(message.text) <= 28:
-            return True
-        else:
-            return False
+        if (enable_game[message.chat.id] and 1 <= int(message.text) <= max_move ): return True
+        else: return False
 
-@bot.message_handler(commands=['game'])
+@bot.message_handler(commands=['sg'])
 def send_welcome(message):
-    global turn, candys, enable_game
-    bot.reply_to(message, 'Начинаем игру в конфеты')
-    candys[message.chat.id] = 117
-    turn[message.chat.id] = choice(['Bot', 'User'])
-    bot.send_message(message.chat.id, f'Начинает {turn[message.chat.id]}')
+    print('\t Играем в конфеты')
+    global who_fierst, candys, enable_game, max_move, max_candys
+    max_move = 28
+    max_candys = 117
+    bot.reply_to(message, f'Начинаем игру в конфеты, на столе {max_candys} берем не больше { max_move} шт. за ход')
+    candys[message.chat.id] = max_candys
+    who_fierst[message.chat.id] = choice(['Bot', 'Вы'])
+    bot.send_message(message.chat.id, f'Начинает игру в конфеты {who_fierst[message.chat.id]}')
     enable_game[message.chat.id] = True
-    if turn[message.chat.id] == 'Bot':
-        take = randint(1, candys[message.chat.id] % 29)
-        candys[message.chat.id] -= take
-        bot.send_message(message.chat.id, f'Бот взял {take}')
-        bot.send_message(message.chat.id,
-                         f'Осталось {candys[message.chat.id]}')
-        turn[message.chat.id] = 'User'
+    if who_fierst[message.chat.id] == 'Bot':
+        how_much_candys = randint(1, candys[message.chat.id] % (max_move + 1))
+        candys[message.chat.id] -= how_much_candys
+        bot.send_message(message.chat.id, f'Бот взял со стола конфет {how_much_candys}')
+        bot.send_message(message.chat.id,f'Осталось конфет на столе {candys[message.chat.id]}')
+        who_fierst[message.chat.id] = 'Вы'
 
 @bot.message_handler(func=handle_game_proc)
 def game_process(message):
-    global candys, turn, enable_game
-    if turn[message.chat.id] == 'User':
-        if candys[message.chat.id] > 28:
+    global candys, who_fierst, enable_game
+    if who_fierst[message.chat.id] == 'Вы':
+        if candys[message.chat.id] > max_move:
             candys[message.chat.id] -= int(message.text)
-            bot.send_message(message.chat.id,
-                             f'Осталось {candys[message.chat.id]}')
-            if candys[message.chat.id] > 28:
-                temp = candys[message.chat.id] % 29
-                if temp == 0 : take = randint(1, 28)
-                else : take = randint(1, temp)
-                candys[message.chat.id] -= take
-                bot.send_message(message.chat.id,
-                                 f'Бот взял {take}')
-                bot.send_message(message.chat.id,
-                                 f'Осталось {candys[message.chat.id]}')
-                if candys[message.chat.id] <= 28:
-                    bot.send_message(message.chat.id, 'User Win')
+            bot.send_message(message.chat.id,f'Осталось на столе конфет {candys[message.chat.id]} Ваш ход')
+            if candys[message.chat.id] > max_move:
+                temp = candys[message.chat.id] % (max_move + 1)
+                if temp == 0 : how_much_candys = randint(1, max_move)
+                else : how_much_candys = randint(1, temp)
+                candys[message.chat.id] -= how_much_candys
+                bot.send_message(message.chat.id, f'Бот взял со стола конфет {how_much_candys}')
+                bot.send_message(message.chat.id, f'Осталось на столе конфет  {candys[message.chat.id]} Ваш ход')
+                if candys[message.chat.id] <= max_move:
+                    bot.send_message(message.chat.id, 'Вы победили')
                     enable_game[message.chat.id] = False
             else:
-                bot.send_message(message.chat.id, 'Bot Win')
+                bot.send_message(message.chat.id, 'Bot победил')
                 enable_game[message.chat.id] = False
         else:
-            bot.send_message(message.chat.id, 'Bot Win')
+            bot.send_message(message.chat.id, 'Bot победил')
             enable_game[message.chat.id] = False
 
 bot.infinity_polling()
